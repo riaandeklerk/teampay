@@ -1,0 +1,15 @@
+<%= form_for @game do |f| %>
+<%= f.label :name %><br>
+<%= f.text_field :name %>
+
+<%= f.label :game_date %><br>
+<%= f.date_field :game_date %>
+
+<%= f.label :team %><br>
+<%= f.text_field :team %>
+
+<%= f.label :cost %><br>
+<%= f.text_field :cost %>
+
+<%= f.submit %>
+<% end %>

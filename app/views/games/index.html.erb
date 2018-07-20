@@ -1,0 +1,22 @@
+<h1>Games#index</h1>
+<p>Find me in app/views/games/index.html.erb</p>
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Team</th>
+    <th>Cost</th>
+    <th>Paid</th>
+  </tr>
+  <% @games.each do |game| %>
+  <tr>
+    <td><%= game.name %></td>
+    <td><%= game.game_date %></td>
+    <td><%= game.team %></td>
+    <td><%= game.cost %></td>
+    <td>TBA</td>
+  </tr>
+  <% end %>
+</table>

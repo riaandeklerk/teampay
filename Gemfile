@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
+ruby '2.5.1'
 
 gem 'rails', '5.1.0'
 gem 'omniauth-google-oauth2'
 gem 'stripe'
+gem 'pg', '~> 0.18'
+gem 'turbolinks'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

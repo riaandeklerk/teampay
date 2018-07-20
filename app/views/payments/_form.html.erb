@@ -1,0 +1,24 @@
+<p>Name: <%= @game.name %></p>
+<p>Date: <%= @game.game_date %></p>
+<p>Team: <%= @game.team %></p>
+<p>Cost: <%= @game.cost %></p>
+
+<%= form_for([@game, @payment]) do |f| %>
+<article>
+  <% if flash[:error].present? %>
+  <div id="error_explanation">
+    <p><%= flash[:error] %></p>
+  </div>
+  <% end %>
+  <label class="amount">
+    <span>Amount: $4.00</span>
+  </label>
+</article>
+<script src="https://checkout.stripe.com/checkout.js"
+	class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-description="<%= @description %>"
+        data-amount="400"
+        data-locale="auto">
+</script>
+<% end %>

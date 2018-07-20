@@ -1,0 +1,4 @@
+<p>Name: <%= @game.name %></p>
+<p>Date: <%= @game.game_date %></p>
+<p>Team: <%= @game.team %></p>
+<p>Cost: <%= @game.cost %></p>
