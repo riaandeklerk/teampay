@@ -8,12 +8,36 @@
     <th>Team</th>
     <th>Cost</th>
     <th>Paid</th>
+    <th>Payment Link</th>
   </tr>
   <tr>
     <td><%= @game.name %></td>
     <td><%= @game.game_date %></td>
     <td><%= @game.team %></td>
     <td><%= @game.cost %></td>
-    <td>TBA</td>
+    <td><%= number_to_currency(@game.payments.paid.sum(&:stripe_amount)/100) %></td>
+    <td><%= link_to 'Make Payments', new_game_payment_path(@game) %></td>
   </tr>
 </table>
+
+<% if administrator %>
+<h2>Payment History</h2>
+<p>For this ONLY for: <%= @game.name %></p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Amount</th>
+    <th>Status</th>
+  </tr>
+  <% @game.payments.each do |payment| %>
+  <tr>
+    <td><%= payment.customer.name %></td>
+    <td><%= payment.customer.email %></td>
+    <td><%= number_to_currency(payment.stripe_amount/100) %></td>
+    <td><%= payment.stripe_status %></td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

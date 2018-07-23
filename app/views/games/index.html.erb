@@ -9,6 +9,7 @@
     <th>Team</th>
     <th>Cost</th>
     <th>Paid</th>
+    <th>Link</th>
   </tr>
   <% @games.each do |game| %>
   <tr>
@@ -16,7 +17,8 @@
     <td><%= game.game_date %></td>
     <td><%= game.team %></td>
     <td><%= game.cost %></td>
-    <td>TBA</td>
+    <td><%= number_to_currency(game.payments.paid.sum(&:stripe_amount)/100) %></td>
+    <td><%= link_to 'View', game_path(game) %><td>
   </tr>
   <% end %>
 </table>

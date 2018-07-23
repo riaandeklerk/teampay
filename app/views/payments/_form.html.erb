@@ -11,14 +11,19 @@
   </div>
   <% end %>
   <label class="amount">
-    <span>Amount: $4.00</span>
+    <span>Payable Amount: <%= number_to_currency(@game.cost) %></span>
   </label>
 </article>
 <script src="https://checkout.stripe.com/checkout.js"
 	class="stripe-button"
         data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+	data-name="TeamPay"
         data-description="<%= @description %>"
-        data-amount="400"
-        data-locale="auto">
+        data-amount="<%= @amount %>"
+        data-locale="auto"
+	data-currency="nzd"
+	email="<%= @email %>"
+	currency="nzd"
+	allowRememberMe="true">
 </script>
 <% end %>

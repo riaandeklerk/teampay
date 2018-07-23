@@ -1,15 +1,46 @@
 <%= form_for @game do |f| %>
-<%= f.label :name %><br>
-<%= f.text_field :name %>
-
-<%= f.label :game_date %><br>
-<%= f.date_field :game_date %>
-
-<%= f.label :team %><br>
-<%= f.text_field :team %>
-
-<%= f.label :cost %><br>
-<%= f.text_field :cost %>
-
-<%= f.submit %>
+<table>
+  <tr>
+    <th>Game Fields</th>
+    <th>Values</th>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :name %>
+    </td>
+    <td>
+      <%= f.text_field :name %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :game_date %>
+    </td>
+    <td>
+      <%= f.date_field :game_date %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :team %>
+    </td>
+    <td>
+      <%= f.text_field :team %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :cost %>
+    </td>
+    <td>
+      <%= f.text_field :cost %>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <%= f.submit %>
+    </td>
+  </tr>
+</table>
 <% end %>

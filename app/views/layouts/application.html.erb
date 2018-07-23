@@ -11,8 +11,13 @@
   <body>
     <div>
       <% if current_user %>
+      <% if administrator %>
+      <%= link_to 'Games', games_path %> | <%= link_to 'New Games', new_game_path %> | Signed in as <strong><%= current_user.name %></strong>!
+      <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <% else %>
       Signed in as <strong><%= current_user.name %></strong>!
       <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <% end %>
       <% else %>
       <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
       <% end %>
