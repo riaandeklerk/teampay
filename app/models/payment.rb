@@ -1,6 +1,6 @@
 class Payment < ApplicationRecord
-  # TODO: add to model:
-  # payment_request: authenticity_token, stripeToken, stripeEmail
-  # stripe_customer: ???
-  # stripe_charge: ???
+  belongs_to :game
+  belongs_to :customer
+
+  scope :paid, -> { where(stripe_paid: true) }
 end

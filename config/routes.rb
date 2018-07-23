@@ -1,28 +1,14 @@
 Rails.application.routes.draw do
-  # get 'payments/new'
-
-  # get 'payments/create'
+  get 'welcome/index'
 
   resources :games do
     resources :payments, only: [:new, :create]
   end
 
-  # get 'games/index'
-
-  # get 'games/show'
-
-  # get 'games/new'
-
-  # get 'games/edit'
-
-  # get 'games/create'
-
-  # get 'games/update'
-
-  # get 'games/destroy'
+  root :to => 'welcome#index'
 
   get 'auth/:provider/callback', to: 'sessions#create'
-  get 'auth/failure', to: redirect('/')
+  get 'auth/failure', to: redirect('/') # TODO: Bad page
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   get 'sessions/create'
