@@ -45,7 +45,7 @@ class PaymentsController < ApplicationController
   end
 
   def retrieve_or_create_customer
-    if customer.stripe_id && !customer.stripe_id.zero?
+    if !customer.stripe_id.nil?
       Stripe::Customer.retrieve(customer.stripe_id)
     else
       customer.update!(stripe_id: stripe_customer.id)
