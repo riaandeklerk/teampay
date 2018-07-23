@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin_user, only: [:new, :edit, :update, :destroy]
+  before_action :check_user
 
   def index
     @games = Game.all.order('game_date DESC')
@@ -17,8 +19,6 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-    #TODO: @game.administrator_id = current_user.id
-    #TODO: stripe stuff??
 
     if @game.save
       redirect_to @game
@@ -34,6 +34,10 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def check_admin_user
+    redirect_to root_url, alert: "Sorry, you do not have the necessary clearance to view this page" unless administrator
+  end
 
   def set_game
     @game = Game.find(params[:id])
