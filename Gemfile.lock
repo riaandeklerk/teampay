@@ -56,6 +56,7 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     erubi (1.7.1)
+    execjs (2.7.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
@@ -161,6 +162,8 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uglifier (4.1.16)
+      execjs (>= 0.3.0, < 3)
     web-console (3.6.2)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -187,6 +190,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   stripe
   turbolinks
+  uglifier
   web-console (>= 3.3.0)
 
 RUBY VERSION

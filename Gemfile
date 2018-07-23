@@ -6,6 +6,7 @@ gem 'omniauth-google-oauth2'
 gem 'stripe'
 gem 'pg', '~> 0.18'
 gem 'turbolinks'
+gem 'uglifier'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
