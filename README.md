@@ -3,7 +3,7 @@ README
 # TeamPay
 
 
-Paying for your team sports and games.
+A simple application for players to pay for the team sports games.
 
   - Create games
   - Google API auth/login
@@ -19,7 +19,6 @@ TODO:
   - Email functionality (Payment requests and confirmations/updates)
   - Slack functionality - Nice!
   - Refined features: model validations, Homepage and routes...
-  - Heroku?!
   - Test coverage
   - Design 101
   - Design 202
@@ -29,8 +28,6 @@ TODO:
 
 
 ### Tech
-
-Dillinger uses a number of open source projects to work properly:
 
 * [ROR] - Ruby on Rails framework
 * [Ruby] - Ruby
@@ -47,7 +44,6 @@ Dillinger uses a number of open source projects to work properly:
 > Stripe API with tokens
 
 ```sh
-$ git clone https://github.com/riaandeklerk/teampay.git
 $ bundle install
 $ RACK_ENV=development RAILS_ENV=development bundle exec rails db:create
 $ RACK_ENV=development RAILS_ENV=development bundle exec rails db:migrate
@@ -56,6 +52,7 @@ GOOGLE_CLIENT_ID=<id-here> \
 GOOGLE_CLIENT_SECRET=<secret-here> \
 PUBLISHABLE_KEY=<stripe-pub-key-here> \
 SECRET_KEY=<stripe-secrets-here> \
+TEAMPAY_ADMINS=<string-comma-seperated-list-of-email-addresses> \
 bundle exec rails s
 ```
 
