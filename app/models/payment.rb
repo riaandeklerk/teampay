@@ -1,6 +1,8 @@
 class Payment < ApplicationRecord
-  belongs_to :game
-  belongs_to :customer
+  belongs_to :payee, :class_name => "User"
+
+  has_many :players
+  has_many :games
 
   scope :paid, -> { where(stripe_paid: true) }
 end
