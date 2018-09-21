@@ -1,16 +1,15 @@
 class User < ApplicationRecord
   validates :name, :email, presence: true
 
-  has_one :player
   has_many :payments
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      customer = Customer.find_or_create_by(
+      player = Player.find_or_create_by(
         email: auth.info.email,
         name: auth.info.name
       )
-      user.customer = customer
+      user.player = player
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
