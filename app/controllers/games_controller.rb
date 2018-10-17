@@ -33,6 +33,20 @@ class GamesController < ApplicationController
   def destroy
   end
 
+  def players
+    @players = User.all.select(&:name)
+  end
+
+  def new_player
+    @player = User.new(player_params)
+
+    if @player.save
+      redirect_to @game
+    else
+      #render action: 'new'
+    end
+  end
+
   private
 
   def check_admin_user

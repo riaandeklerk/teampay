@@ -1,0 +1,22 @@
+<div>
+<table>
+  <% @players.each do |player| %>
+  <tr>
+    <td>
+        <input type="checkbox" name="" value=""> 
+        <%= player.name %>
+        <button type="button">ADD</button>
+    </td>
+  </tr>
+  <% end %>
+</table>
+</div>
+<div>
+<button type="button">+ NEW PLAYER</button>
+</div>
+<div>
+<button type="button">OK</button>
+</div>
+<div>
+<button type="button">Cancel</button>
+</div>

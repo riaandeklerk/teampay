@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :games do
-    resources :payments, only: [:new, :create]
+    #resources :payments, only: [:new, :create]
+    #resources :players do
+    get 'players', to: 'games#players'
+    get 'new_player', to: 'games#new_player'
+    #end
   end
 
   root :to => 'welcome#index'

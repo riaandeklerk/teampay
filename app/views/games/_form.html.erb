@@ -30,6 +30,14 @@
   </tr>
   <tr>
     <td>
+      <%= f.label :league %>
+    </td>
+    <td>
+      <%= f.select :league, Game::LEAGUE %>
+    </td>
+  </tr>
+  <tr>
+    <td>
       <%= f.label :cost %>
     </td>
     <td>
