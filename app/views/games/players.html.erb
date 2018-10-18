@@ -1,3 +1,4 @@
+<h1>Add players</h1>
 <div>
 <table>
   <% @players.each do |player| %>
@@ -5,6 +6,8 @@
     <td>
         <input type="checkbox" name="" value=""> 
         <%= player.name %>
+        <%= @game.player_added?(player.id) %>
+        <%= link_to 'ADD', game_add_player_path, data: { id: player.id }, method: :post %>
         <button type="button">ADD</button>
     </td>
   </tr>
@@ -12,7 +15,7 @@
 </table>
 </div>
 <div>
-<button type="button">+ NEW PLAYER</button>
+<%= link_to '+ NEW PLAYER', game_new_player_path %>
 </div>
 <div>
 <button type="button">OK</button>
