@@ -4,11 +4,12 @@
   <% @players.each do |player| %>
   <tr>
     <td>
-        <input type="checkbox" name="" value=""> 
-        <%= player.name %>
-        <%= @game.player_added?(player.id) %>
-        <%= link_to 'ADD', game_add_player_path, data: { id: player.id }, method: :post %>
-        <button type="button">ADD</button>
+      <%= player.name %>
+      <% unless @game.player_added?(player.id) %>
+        <%= link_to 'ADD', game_add_player_path(player: player), method: :post %>
+      <% else %>
+        <%= link_to 'REMOVE', game_remove_player_path(player: player), method: :post %>
+      <% end %>
     </td>
   </tr>
   <% end %>

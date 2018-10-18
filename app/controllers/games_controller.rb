@@ -40,7 +40,22 @@ class GamesController < ApplicationController
 
   def add_player #_to_game
     @game = Game.find(params[:game_id])
-    @game.players.save!(player)
+    @game.players << User.where(id: params[:player])
+    if @game.save!
+      redirect_back(fallback_location: @game) 
+      #redirect_to(:back)
+      #redirect_to 
+    else
+    end
+  end
+
+  def remove_player #_to_game
+    @game = Game.find(params[:game_id])
+    if @game.players.delete(User.find(params[:player]))
+      redirect_back(fallback_location: @game) 
+    else
+    end
+    #@game.save!
   end
 
   def new_player
@@ -76,9 +91,5 @@ class GamesController < ApplicationController
 
   def player_params
     params.require(:user).permit(:name, :email)
-  end
-
-  def add_player_to_game_params
-    params.require(:data).permit(:id)
   end
 end

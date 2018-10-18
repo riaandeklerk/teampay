@@ -6,6 +6,6 @@ class Game < ApplicationRecord
   TEAM = ['Mighty Flux']
 
   def player_added?(player_id)
-    players.include?(player_id)
+    players.map(&:id).include?(player_id)
   end
 end

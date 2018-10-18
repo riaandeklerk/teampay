@@ -10,7 +10,15 @@
 </div>
 <div>
   <div><h3>WHO PLAYED?</h3></div>
-  <div>0 players total</div>
+  <% if @game.players.present? %>
+    <% @game.players.each do |player| %>
+      <div>
+        <%= player.name %>
+      </div>
+    <% end %>
+  <% else %>
+    <div>0 players total</div>
+  <% end %>
   <%= link_to 'Add players', game_players_path(@game) %>
 </div>
 <div>
