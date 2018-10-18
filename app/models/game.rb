@@ -4,4 +4,8 @@ class Game < ApplicationRecord
 
   LEAGUE = ['MIXED','MENS']
   TEAM = ['Mighty Flux']
+
+  def player_added?(player_id)
+    players.map(&:id).include?(player_id)
+  end
 end

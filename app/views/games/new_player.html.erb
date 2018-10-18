@@ -1,0 +1,22 @@
+<%= form_for(@player, url: game_save_new_player_path) do |f| %>
+  <h1>+ New player</h1>
+  <div>
+    <%= f.label :name %>
+  </div>
+  <div>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label 'Email address' %>
+  </div>
+  <div>
+    <%= f.text_field :email %>
+  </div>
+<%= f.submit %>
+  <div>
+    <button type="button">OK</button>
+  </div>
+  <div>
+    <button type="button">Cancel</button>
+  </div>
+<% end %>

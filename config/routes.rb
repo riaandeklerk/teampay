@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     #resources :players do
     get 'players', to: 'games#players'
     get 'new_player', to: 'games#new_player'
+    post 'add_player', to: 'games#add_player'
+    post 'remove_player', to: 'games#remove_player'
+    post 'save_new_player', to: 'games#save_new_player'
     #end
   end
 
