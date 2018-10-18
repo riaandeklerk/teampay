@@ -69,7 +69,7 @@ class GamesController < ApplicationController
 
     if @player.save
       game.save!
-      redirect_to game
+      redirect_to game_players_path
     else
       #render action: 'new'
     end

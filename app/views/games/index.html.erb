@@ -1,24 +1,31 @@
-<h1>Games#index</h1>
-<p>Find me in app/views/games/index.html.erb</p>
+<h1>Hi <%= current_user.name %></h1>
+<div>
+  <%= link_to '+ NEW GAMES', new_game_path %>
+</div>
+<div>
+<h4>PAST GAMES</h4>
+<hr>
+<% @games.each do |game| %>
+  <div>
+    <%= game.name %> <%= game.cost %> <button type="button">PAY ALL</button>
+  </div>
+  <div>
+    <%= game.game_date %>
+  </div>
+  <div>
+    <%= game.team %>
+  </div>
+  <div>
+    <%= game.league %>
+  </div>
+  <div>
+    <h4><%= game.players.count || '0' %> players total</h4>
+  </div>
+  <% game.players.each do |player| %>
+    <div>
+      <p><%= player.name %> $5 <button type="button">PAY</button></p>
+    </div>
+  <% end if game.players.present? %>
+  <hr>
+<% end %>
 
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Date</th>
-    <th>Team</th>
-    <th>Cost</th>
-    <th>Paid</th>
-    <th>Link</th>
-  </tr>
-  <% @games.each do |game| %>
-  <tr>
-    <td><%= game.name %></td>
-    <td><%= game.game_date %></td>
-    <td><%= game.team %></td>
-    <td><%= game.cost %></td>
-    <td><%= number_to_currency(game.payments.paid.sum(&:stripe_amount)/100) %></td>
-    <td><%= link_to 'View', game_path(game) %><td>
-  </tr>
-  <% end %>
-</table>
