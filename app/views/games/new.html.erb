@@ -1,7 +1,22 @@
-<h1>+ NEW GAME</h1>
-<h3>DEFINE GAME</h3>
+<header>
+  <div class="d-flex justify-content-between align-items-baseline">
+    <div class="p-2">
+      <h2 class="large-text gray-text"><b>+ NEW GAME</b></h2>
+    </div>
+  </div>
+</header>
 
 
-<%= render 'form' %>
-
-<%= link_to 'Cancel', games_path %>
+<div class="d-flex border p-2">
+  <div class="d-flex flex-column flex-grow-1">
+    <div class="p-2 ">
+      <h2 class="gray-text"><b>DEFINE GAME</b></h2>
+    </div>
+    <div>
+      <%= render 'form' %>
+    </div>
+    <div>
+      <button type="button" class="btn btn-light rounded-0 grayed btn-lg btn-block"><%= link_to 'Cancel', games_path %></button>
+    </div>
+  </div>
+</div>

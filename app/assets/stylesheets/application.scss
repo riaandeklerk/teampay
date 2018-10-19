@@ -15,7 +15,7 @@
  *= require_self
  */
 
-body {
+html {
   font-family: 'Rubik', sans-serif;
 }
 
@@ -77,6 +77,14 @@ html {
 
 .large-text {
   font-size: 36px;
+}
+
+.medium-text {
+  font-size: 1em;
+}
+
+.select-size {
+  height: 10.5px;
 }
 
 .gray-text {
