@@ -14,3 +14,132 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: 'Rubik', sans-serif;
+}
+
+#time,
+#date,
+#team {
+  padding: 0px;
+}
+
+/* p,
+h1,
+h2,
+h3,
+h4 {
+  color: darkgray;
+} */
+
+.chevon-size {
+  width: 100%;
+  height: auto;
+}
+
+.expanded-card {
+  margin-bottom: 100px;
+}
+
+.filter {
+  width: 30%;
+}
+
+.header {
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+html {
+  font-size: 12px;
+  padding: 20px;
+}
+
+.dollars {
+  color: #d82258;
+  font-size: 36px;
+}
+
+.dollars-small {
+  color: #d82258;
+  font-size: 22px;
+}
+
+.dollars-small-paid {
+  color: limegreenß;
+  font-size: 22px;
+}
+
+.dollars-total-small {
+  font-size: 22px;
+}
+
+.large-text {
+  font-size: 36px;
+}
+
+.gray-text {
+  color: darkgray;
+}
+
+.green-text {
+  color: #3ead70;
+}
+
+.green-tick {
+  color: transparent;
+  text-shadow: 0 0 0 #3ead70;
+}
+
+.grayed {
+  background-color: silver;
+  color: black;
+  border-color: gray;
+}
+
+.border {
+  margin-bottom: 1em;
+}
+
+.new-game-button {
+  padding: 20px;
+}
+
+.add-remove {
+  width: 10em
+}
+
+@media (min-width: 800px) {
+  html {
+    margin-left: 15%;
+    margin-right: 15%;
+    /* padding: 10px; */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  .dollars,
+  .large-text,
+  h1 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 380px) {
+  h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 280px) {
+  html {
+    font-size: 5px;
+  }
+}
+
