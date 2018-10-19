@@ -5,6 +5,7 @@
 <div>
 <h4>PAST GAMES</h4>
 <hr>
+<h2><%= @cart %></h2>
 <% @games.each do |game| %>
   <div>
     <%= game.name %> <%= game.cost %> <button type="button">PAY ALL</button>
@@ -24,6 +25,7 @@
   <% game.players.each do |player| %>
     <div>
       <p><%= player.name %> $5 <button type="button">PAY</button></p>
+      <%= link_to 'PAY', add_game_player_payment_games_path(player: player, game: game, cart: @cart), method: :post %>
     </div>
   <% end if game.players.present? %>
   <hr>

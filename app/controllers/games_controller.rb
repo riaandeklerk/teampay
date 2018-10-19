@@ -4,6 +4,7 @@ class GamesController < ApplicationController
   before_action :check_user
 
   def index
+    @cart = cart
     @games = Game.all.order('game_date DESC')
   end
 
@@ -38,24 +39,30 @@ class GamesController < ApplicationController
     @players = User.all.select(&:name)
   end
 
-  def add_player #_to_game
+  def add_game_player_payment
+    player = params[:player]
+    game = params[:game]
+    @cart = cart(params[:cart].to_i)
+    redirect_back(fallback_location: game) 
+  end
+
+  def add_player
     @game = Game.find(params[:game_id])
     @game.players << User.where(id: params[:player])
     if @game.save!
       redirect_back(fallback_location: @game) 
-      #redirect_to(:back)
-      #redirect_to 
     else
+      #ohh deer
     end
   end
 
-  def remove_player #_to_game
+  def remove_player
     @game = Game.find(params[:game_id])
     if @game.players.delete(User.find(params[:player]))
       redirect_back(fallback_location: @game) 
     else
+      #ohh nooo!
     end
-    #@game.save!
   end
 
   def new_player
@@ -71,11 +78,16 @@ class GamesController < ApplicationController
       game.save!
       redirect_to game_players_path
     else
-      #render action: 'new'
+      #chips!
     end
   end
 
   private
+
+  def cart(obj: 0)
+    @cart ||= 0
+    @cart = @cart + obj.to_i
+  end
 
   def check_admin_user
     redirect_to root_url, alert: "Sorry, you do not have the necessary clearance to view this page" unless administrator

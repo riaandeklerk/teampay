@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     post 'save_new_player', to: 'games#save_new_player'
     #end
   end
+  
+  resource :games do
+    post 'add_game_player_payment', to: 'add_game_player_payment'
+  end
 
   root :to => 'welcome#index'
 
