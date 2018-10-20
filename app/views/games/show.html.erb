@@ -1,29 +1,90 @@
-<h1><%= @game.name.upcase %></h1>
-<div>
-  <div><h3>DEFINE GAME</h3></div>
-  <div>Date:<%= @game.game_date %></div>
-  <div>Team:<%= @game.team %></div>
-  <div>League:<%= @game.league %></div>
-  <div>Cost:<%= @game.cost %></div>
-  <div>Active:</div>
-  <%= link_to 'EDIT', edit_game_path(@game) %>
+<!--<h1><%#= @game.name.upcase %></h1>-->
+<!--<div>-->
+<!--  <div><h3>DEFINE GAME</h3></div>-->
+<!--  <div>Date:<%#= @game.game_date %></div>-->
+<!--  <div>Team:<%#= @game.team %></div>-->
+<!--  <div>League:<%#= @game.league %></div>-->
+<!--  <div>Cost:<%#= @game.cost %></div>-->
+<!--  <div>Active:</div>-->
+  <%#= link_to 'EDIT', edit_game_path(@game) %>
+<!--</div>-->
+<!--<div>-->
+<!--  <div><h3>WHO PLAYED?</h3></div>-->
+  <%# if @game.players.present? %>
+    <%# @game.players.each do |player| %>
+<!--      <div>-->
+        <%#= player.name %>
+<!--      </div>-->
+    <%# end %>
+  <%# else %>
+<!--    <div>0 players total</div>-->
+  <%# end %>
+  <%#= link_to 'Add players', game_players_path(@game) %>
+<!--</div>-->
+<!--<div>-->
+<!--  <button type="button">OK</button>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <button type="button">Cancel</button>-->
+<!--</div>-->
+
+<header>
+  <div class="d-flex justify-content-between align-items-baseline">
+    <div class="p-2">
+      <h2 class="large-text gray-text"><b>+ NEW GAME</b></h2>
+    </div>
+  </div>
+</header>
+
+<div class="d-flex border p-2">
+  <div class="d-flex flex-column flex-grow-1">
+    <div class="p-2 ">
+      <h2 class="gray-text"><b>DEFINE GAME</b></h2>
+    </div>
+    <div>
+      <h2 class="gray-text">Date: <%= @game.game_date %></h2>
+    </div>
+    <div>
+      <h2 class="gray-text">Team: <%= @game.team %></h2>
+    </div>
+    <div>
+      <h2 class="gray-text">League:<%= @game.league %></h2>
+    </div>
+    <div>
+      <h2 class="gray-text">Cost:<%= @game.cost %></h2>
+    </div>
+    <button type="button" class="btn btn-light rounded-0 grayed btn-lg btn-block">
+      <h1><b><%= link_to 'EDIT', edit_game_path(@game) %></b></h1>
+    </button>
+  </div>
 </div>
-<div>
-  <div><h3>WHO PLAYED?</h3></div>
-  <% if @game.players.present? %>
-    <% @game.players.each do |player| %>
-      <div>
-        <%= player.name %>
-      </div>
+
+<div class="d-flex border p-2 mb-5">
+  <div class="d-flex flex-column flex-grow-1">
+    <div class="p-2 ">
+      <h2 class="gray-text"><b>Who Played?</b></h2>
+    </div>
+    <div>
+      <h2 class="gray-text"><%= @game.players.count %> Players Total</h2>
+    </div>
+    <% if @game.players.present? %>
+      <% @game.players.each do |player| %>
+        <div>
+          <h3 class="gray-text"><%= player.name %></h3>
+        </div>
+      <% end %>
     <% end %>
-  <% else %>
-    <div>0 players total</div>
-  <% end %>
-  <%= link_to 'Add players', game_players_path(@game) %>
+    <button type="button" class="btn btn-light rounded-0 grayed btn-block">
+      <h1>
+        <b><%= link_to 'Add players', game_players_path(@game) %></b>
+      </h1>
+    </button>
+  </div>
 </div>
-<div>
-  <button type="button">OK</button>
-</div>
-<div>
-  <button type="button">Cancel</button>
-</div>
+
+<button type="button" class="btn btn-light rounded-0 grayed btn-sm btn-block">
+  <h1><b>OK</b></h1>
+</button>
+<button type="button" class="btn btn-light rounded-0 grayed btn-sm btn-block">
+  <h1><b>Cancel</b></h1>
+</button>
