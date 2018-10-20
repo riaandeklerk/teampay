@@ -1,22 +1,57 @@
+<%#= form_for(@player, url: game_save_new_player_path) do |f| %>
+<!--  <h1>+ New player</h1>-->
+<!--  <div>-->
+<%#= f.label :name %>
+<!--  </div>-->
+<!--  <div>-->
+<%#= f.text_field :name %>
+<!--  </div>-->
+<!--  <div>-->
+<%#= f.label 'Email address' %>
+<!--  </div>-->
+<!--  <div>-->
+<%#= f.text_field :email %>
+<!--  </div>-->
+<%#= f.submit %>
+<!--  <div>-->
+<!--    <button type="button">OK</button>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <button type="button">Cancel</button>-->
+<!--  </div>-->
+<%# end %>
+
+<header>
+  <div class="d-flex justify-content-between align-items-baseline">
+    <div class="p-2">
+      <h2 class="large-text gray-text"><b>+ New Player</b></h2>
+    </div>
+  </div>
+</header>
+
 <%= form_for(@player, url: game_save_new_player_path) do |f| %>
-  <h1>+ New player</h1>
-  <div>
-    <%= f.label :name %>
-  </div>
-  <div>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label 'Email address' %>
-  </div>
-  <div>
-    <%= f.text_field :email %>
-  </div>
-<%= f.submit %>
-  <div>
-    <button type="button">OK</button>
-  </div>
-  <div>
-    <button type="button">Cancel</button>
-  </div>
+
+  <form>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form-group">
+      <%= f.label 'Email address' %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="form-group">
+      <%= f.submit(options = { :class => "btn btn-light rounded-0 grayed btn-lg btn-block " }) %>
+    </div>
+  </form>
+
 <% end %>
+
+
+<button type="button" class="btn btn-light rounded-0 grayed btn-lg btn-block">
+  <h3><b>OK</b></h3>
+</button>
+<button type="button" class="btn btn-light rounded-0 grayed btn-lg btn-block">
+  <h3><b>Cancel</b></h3>
+</button>
+
