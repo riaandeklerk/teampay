@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     post 'add_game_player_payment', to: 'add_game_player_payment'
   end
 
+  resources :payments
+
   root :to => 'welcome#index'
 
   get 'auth/:provider/callback', to: 'sessions#create'

@@ -1,31 +1,59 @@
 class PaymentsController < ApplicationController
   before_action :check_user
 
-  def new
-    @payment = Payment.new
-    @game = Game.find(params[:game_id])
-    @description = payment_description
-    @amount = payable_amount
-    @email = current_user.email
-  end
+  # def new
+  #   @payment = Payment.new
+  #   @game = Game.find(params[:game_id])
+  #   @description = payment_description
+  #   @amount = payable_amount
+  #   @email = current_user.email
+  # end
 
   def create
-    @game = Game.find(params[:game_id])
+    # @game = Game.find(params[:game_id])
+
+    byebug
 
     retrieve_or_create_customer
-    link_user_to_customer
+    # link_user_to_customer
     charge_customer
-    create_payment
+    create_and_link_payments
 
-    redirect_to @game, notice: "Thanks you!"
+    clear_cart_with_balance
+
+    redirect_back(fallback_location: games_path)
+
+    #redirect_to @game, notice: "Thanks you!"
   end
 
   private
 
+  def clear_cart_with_balance
+    [:cart, :total].each { |key| session.delete(key) }
+  end
+
+  def create_and_link_payments
+    link(create_payment)
+  end
+
+  def link(payment)
+    payment.games << session[:cart].keys.map { |id| Game.find(id) }
+    session[:cart].values.each do |players| 
+      payment.players << players.map { |id| User.find id }
+    end
+    # session[:cart].each do |game, players|
+    #   payment.games << session[:cart].map {|id| Game.find id}  
+    #   payment.game = game
+    #   players.each do |player|
+    #     payment.player = player
+    #   end
+    # end
+  end
+
   def create_payment
     Payment.create!(
-      game_id: @game.id,
-      customer_id: customer.id,
+      # game_id: @game.id,
+      payee_id: customer.id,
       stripe_charge_id: charge_customer.id,
       stripe_amount: charge_customer.amount,
       stripe_status: charge_customer.status,
@@ -33,12 +61,12 @@ class PaymentsController < ApplicationController
     )
   end
 
-  def link_user_to_customer
-    current_user.update!(customer_id: customer.id)
-  end
+  # def link_user_to_customer
+  #   current_user.update!(customer_id: customer.id)
+  # end
 
   def customer
-    @customer ||= Customer.find_or_create_by(
+    @customer ||= User.find_by(
       email: current_user.email,
       name: current_user.name
     )
@@ -76,15 +104,19 @@ class PaymentsController < ApplicationController
   end
 
   def payment_description
-    @game.team + ' (' + @game.game_date.to_s + ') - ' + @game.name
+    @payment_description ||= session[:cart].map do |game, players| 
+      'G' + game.to_s + 'p' + players.join(',')
+    end.join('-') + '|U' + current_user.id.to_s
+    #@game.team + ' (' + @game.game_date.to_s + ') - ' + @game.name
   end
 
   def payable_amount
-    @payment_description ||= (@game.cost * 100).to_i
+    @payable_amount ||= session[:total].to_i
+    #@payment_description ||= (@game.cost * 100).to_i
     # TODO: do something smart with @game.cost and players here
   end
 
   def payment_params
-    params.permit(:authenticity_token, :stripeToken, :stripeEmail, :game_id)
+    params.permit(:authenticity_token, :stripeToken, :stripeEmail)
   end
 end

@@ -2,15 +2,14 @@ class User < ApplicationRecord
   validates :name, :email, presence: true
   validates :email, uniqueness: true
 
-  has_many :payments
+  has_many :payments, as: :payee
+
+  scope :paid_game, ->(game) { payments.where.in(game.payments) }#joins(:payments).where(payments.game_id = game.id AND IN payments }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      player = Player.find_or_create_by(
-        email: auth.info.email,
-        name: auth.info.name
-      )
-      user.player = player
+      
+      #user.player = player
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email

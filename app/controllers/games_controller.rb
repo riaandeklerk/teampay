@@ -4,8 +4,8 @@ class GamesController < ApplicationController
   before_action :check_user
 
   def index
-    @cart = cart
     @games = Game.all.order('game_date DESC')
+    @total = payment_amount
   end
 
   def show
@@ -42,7 +42,17 @@ class GamesController < ApplicationController
   def add_game_player_payment
     player = params[:player]
     game = params[:game]
-    @cart = cart(params[:cart].to_i)
+    cart = session[:cart] || {}
+    if cart.present?
+      if cart.has_key?(game)
+        cart[game] << player
+      else
+        cart[game] = [player]
+      end
+    else
+      cart[game] = [player]
+    end
+    session[:cart] = cart
     redirect_back(fallback_location: game) 
   end
 
@@ -84,9 +94,23 @@ class GamesController < ApplicationController
 
   private
 
-  def cart(obj: 0)
-    @cart ||= 0
-    @cart = @cart + obj.to_i
+  def payment_amount
+    #byebug
+    if session.has_key?(:total) || session.has_key?(:cart)
+      calculate_balance
+    else
+      0 #need curency here
+    end
+    #session[:total] || 0
+  end
+
+  def calculate_balance
+    total = 0
+    session[:cart].each do |game, players|
+      total = total + (Game.find(game).player_fee) * players.count
+      #total = total + (Game.find(game).cost) * players.count
+    end
+    session[:total] = (total * 100).to_i
   end
 
   def check_admin_user

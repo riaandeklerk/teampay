@@ -5,8 +5,10 @@
 <div>
 <h4>PAST GAMES</h4>
 <hr>
-<h2><%= @cart %></h2>
+<h2><%= session[:cart] %></h2>
+<h2><%= @total %></h2>
 <% @games.each do |game| %>
+<h3><%= game.player_fee %></h3>
   <div>
     <%= game.name %> <%= game.cost %> <button type="button">PAY ALL</button>
   </div>
@@ -24,10 +26,35 @@
   </div>
   <% game.players.each do |player| %>
     <div>
-      <p><%= player.name %> $5 <button type="button">PAY</button></p>
-      <%= link_to 'PAY', add_game_player_payment_games_path(player: player, game: game, cart: @cart), method: :post %>
+      <p>
+        <%= player.name %> $5
+          <% unless session.has_key?(:cart) && session[:cart].has_key?(game.id.to_s) && session[:cart][game.id.to_s].include?(player.id.to_s) %>
+            <%= link_to 'PAY', add_game_player_payment_games_path(player: player, game: game), method: :post %>
+          <% end %>
+      </p>
     </div>
   <% end if game.players.present? %>
   <hr>
 <% end %>
 
+<%= form_tag payments_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+  </article>
+  <script src="https://checkout.stripe.com/checkout.js"
+          class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="TeamPay"
+          data-description="<%= @description %>"
+          data-amount="<%= @total %>"
+          data-locale="auto"
+          data-currency="nzd"
+          data-email=<%= current_user.email %>
+          data-currency="nzd"
+          data-allowRememberMe="true">
+  </script>
+<% end %>
