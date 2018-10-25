@@ -33,7 +33,13 @@ class PaymentsController < ApplicationController
     link(create_payment)
   end
 
+  def successful?(payment)
+    payment && (payment.stripe_status == 'succeeded')
+  end
+
   def link(payment)
+    redirect_back(fallback_location: games_path) unless successful?(payment)
+
     payment.games << session[:cart].keys.map { |id| Game.find(id) }
     session[:cart].values.each do |players| 
       payment.players << players.map { |id| User.find id }
