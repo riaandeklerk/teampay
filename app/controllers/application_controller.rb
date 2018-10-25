@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  # TODO: rename to: administrator?
   def administrator
     @administrator ||= admin_users.include?(current_user.email)
   end
