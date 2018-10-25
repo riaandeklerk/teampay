@@ -11,9 +11,6 @@ class PaymentsController < ApplicationController
 
   def create
     # @game = Game.find(params[:game_id])
-
-    byebug
-
     retrieve_or_create_customer
     # link_user_to_customer
     charge_customer

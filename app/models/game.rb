@@ -20,4 +20,19 @@ class Game < ApplicationRecord
       cost
     end
   end
+
+  def outstanding_balance
+    cost - (paid_players.count * player_fee)
+    #cost - (player_fee * payments.count)
+  end
+
+  def paid_players
+    payments.map {|px| px.players.map(&:id)}.flatten.uniq
+  end
+
+  def paid_player?(player_id)
+    #byebug
+    paid_players.include?(player_id)
+    #payments.map {|px| px.players.map(&:id)}.flatten.uniq.include?(player_id)
+  end
 end

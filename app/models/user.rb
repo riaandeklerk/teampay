@@ -20,4 +20,8 @@ class User < ApplicationRecord
       user.save!
     end
   end
+
+  def paid?(payments)
+    payments
+  end
 end

@@ -107,10 +107,10 @@ class GamesController < ApplicationController
   def calculate_balance
     total = 0
     session[:cart].each do |game, players|
-      total = total + (Game.find(game).player_fee) * players.count
+      total = total + (Game.find(game).player_fee * players.count)
       #total = total + (Game.find(game).cost) * players.count
     end
-    session[:total] = (total * 100).to_i
+    session[:total] = (total * 100).to_d
   end
 
   def check_admin_user
