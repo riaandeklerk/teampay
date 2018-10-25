@@ -1,20 +1,42 @@
 <%= form_for @game do |f| %>
   <div>
-    <%= f.label :name %> <%= f.text_field :name %>
+    <h2>
+      <%= f.label(:name, options={:class => "gray-text"}) %>
+      <%= f.text_field(:name, options={:class => 'medium-text'}) %>
+    </h2>
   </div>
+
   <div>
-    <%= f.label :game_date %> <%= f.date_field :game_date %>
+    <h2>
+    <%= f.label(:game_date, options={:class => "gray-text"}) %>
+    <%= f.date_field(:game_date, options={:class => 'medium-text'}) %>
+    </h2>
   </div>
+
   <div>
-    <%= f.label :team %> <%= f.select :team, Game::TEAM %>
+    <h2>
+    <%= f.label(:team, options={:class => "gray-text"}) %>
+    <%= f.select(:team, Game::TEAM, options={:class =>'select-size'}) %>
+    </h2>
   </div>
+
   <div>
-    <%= f.label :league %> <%= f.select :league, Game::LEAGUE %>
+    <h2>
+    <%= f.label(:league, options={:class => "gray-text"}) %>
+    <%= f.select(:league, Game::LEAGUE, options={:class =>'select-size'}) %>
+    </h2>
   </div>
+
   <div>
-    <%= f.label :cost %> <%= f.text_field :cost %>
+    <h2>
+    <%= f.label(:cost, options={:class => "gray-text"}) %>
+    <%= f.text_field(:cost, options={:class =>'medium-text'}) %>
+    </h2>
   </div>
+
   <div>
-    <%= f.submit %>
+    <h2>
+    <%= f.submit(options={ :class => "btn btn-light rounded-0 grayed btn-lg btn-block", :value => 'OK'}) %>
+    </h2>
   </div>
 <% end %>
