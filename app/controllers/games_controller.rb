@@ -56,6 +56,11 @@ class GamesController < ApplicationController
     redirect_back(fallback_location: game) 
   end
 
+  def clear_cart
+    [:cart, :total].each { |key| session.delete(key) }
+    redirect_back(fallback_location: games_path)
+  end
+
   def add_player
     @game = Game.find(params[:game_id])
     @game.players << User.where(id: params[:player])

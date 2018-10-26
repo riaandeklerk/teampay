@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   
   resource :games do
     post 'add_game_player_payment', to: 'add_game_player_payment'
+    post 'clear_cart', to: 'clear_cart'
   end
 
   resources :payments

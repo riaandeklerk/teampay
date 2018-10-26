@@ -4,7 +4,7 @@
       <h2 class="large-text gray-text">Hi <%= current_user.name %></h2>
     </div>
     <div class="p-2">
-      <a href="http://www.test.com" class="large-text gray-text">Log Out</a>
+      <%= link_to "Sign Out", signout_path, class: "large-text gray-text" %>
     </div>
   </div>
 </header>
@@ -24,6 +24,9 @@
 <div class="d-flex flex-row">
   <div class="pl-2 pb-2">
     <h2 class="gray-text">Cart: <%= number_to_currency(@total / 100) %></h2>
+    <button type="button">
+      <%= link_to 'Clear Cart', clear_cart_games_path(), method: :post %>
+    </button>
   </div>
 </div>
 
