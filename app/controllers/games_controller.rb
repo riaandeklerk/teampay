@@ -29,6 +29,11 @@ class GamesController < ApplicationController
   end
 
   def update
+    if @game.update!(game_params)
+      redirect_to @game
+    else
+      redirect_back(fallback_location: edit_game_path)
+    end
   end
 
   def destroy
@@ -127,7 +132,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :game_date, :cost, :team)
+    params.require(:game).permit(:name, :game_date, :team, :league, :cost)
   end
 
   def player_params

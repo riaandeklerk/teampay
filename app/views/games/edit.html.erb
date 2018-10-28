@@ -1,2 +1,13 @@
-<h1>Games#edit</h1>
-<p>Find me in app/views/games/edit.html.erb</p>
+<div class="d-flex border p-2">
+  <div class="d-flex flex-column flex-grow-1">
+    <div class="p-2 ">
+      <h2 class="gray-text"><b>DEFINE GAME</b></h2>
+    </div>
+    <div>
+      <%= render 'form' %>
+    </div>
+    <div>
+      <button type="button" class="btn btn-light rounded-0 grayed btn-lg btn-block"><%= link_to 'Cancel', games_path %></button>
+    </div>
+  </div>
+</div>
