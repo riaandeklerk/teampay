@@ -9,7 +9,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     if where(provider: nil, uid: nil, email: auth.info.email).present?
       # convert guest users into actual users
-      find_by(email: auth.info.email).only.tap do |user|
+      find_by(email: auth.info.email).first.tap do |user|
         user.provider = auth.provider
         user.uid = auth.uid
         user.name = auth.info.name
