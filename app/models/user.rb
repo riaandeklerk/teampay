@@ -9,13 +9,14 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     if where(provider: nil, uid: nil, email: auth.info.email).present?
       # convert guest users into actual users
-      user = find_by(email: auth.info.email).first
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.update!
+      find_by(email: auth.info.email).tap do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.update!
+      end
     else
       where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
         user.provider = auth.provider
