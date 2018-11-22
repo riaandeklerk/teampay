@@ -47,18 +47,28 @@ class GamesController < ApplicationController
   def add_game_player_payment
     player = params[:player]
     game = params[:game]
-    cart = session[:cart] || {}
-    if cart.present?
-      if cart.has_key?(game)
-        cart[game] << player
+    @game = Game.find(game)
+    unless @game.paid_player?(player)
+      cart = session[:cart] || {}
+      if cart.present?
+        if cart.has_key?(game)
+          cart[game] << player
+        else
+          cart[game] = [player]
+        end
       else
         cart[game] = [player]
       end
+      session[:cart] = cart
+      params[:total] = payment_amount
+      respond_to do |format|
+        format.js
+      end
     else
-      cart[game] = [player]
+      respond_to do |format|
+        format.json { render json: 'error', status: :unprocessable_entity }
+      end
     end
-    session[:cart] = cart
-    redirect_back(fallback_location: game) 
   end
 
   def clear_cart
@@ -105,20 +115,17 @@ class GamesController < ApplicationController
   private
 
   def payment_amount
-    #byebug
     if session.has_key?(:total) || session.has_key?(:cart)
       calculate_balance
     else
       0 #need curency here
     end
-    #session[:total] || 0
   end
 
   def calculate_balance
     total = 0
     session[:cart].each do |game, players|
       total = total + (Game.find(game).player_fee * players.count)
-      #total = total + (Game.find(game).cost) * players.count
     end
     session[:total] = (total * 100).to_d
   end

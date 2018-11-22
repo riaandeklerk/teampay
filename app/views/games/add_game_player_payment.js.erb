@@ -1,0 +1,2 @@
+document.querySelector(".cart-balance").innerHTML = "<%= j render partial: 'cart_total', locals: { total: params[:total] } %>";
+document.querySelector("#g-<%= params[:game] %> .p-<%= params[:player] %>").innerHTML = "";
