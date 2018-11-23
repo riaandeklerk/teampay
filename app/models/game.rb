@@ -5,15 +5,9 @@ class Game < ApplicationRecord
   has_and_belongs_to_many :players, class_name: 'User', join_table: 'games_players'
 
   scope :paid_players, -> { where(stripe_paid: true) }
-  scope :my_games, ->(user) { players.where.in(user) }
-
 
   LEAGUE = ['MIXED','MENS']
   TEAM = ['Mighty Flux']
-
-  def my_game(user)
-    user.in?(players)
-  end
 
   def player_added?(player_id)
     players.map(&:id).include?(player_id)
