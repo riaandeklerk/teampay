@@ -4,7 +4,11 @@ class GamesController < ApplicationController
   before_action :check_user
 
   def index
-    @games = Game.all.order('game_date DESC')
+    if params[:only_my] == 'games'
+      @games = Game.joins(:players).merge(User.where(id: current_user.id)).order('game_date DESC')
+    else
+      @games = Game.all.order('game_date DESC')
+    end
     @total = payment_amount
   end
 

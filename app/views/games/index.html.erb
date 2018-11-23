@@ -52,6 +52,13 @@
   </script>
 <% end %>
 
+<div>
+  <% if params[:only_my] == 'games' %>
+    <%= link_to 'All players and Games', games_path, method: :get %>
+  <% else %>
+    <%= link_to 'Only my Games', games_path(:only_my => "games"), method: :get %>
+  <% end %>
+</div>
 
 <% @games.each do |game| %>
   <div id="game-<%= game.id %>" class="border gray-text game nr2 ">
@@ -79,7 +86,7 @@
       </div>
     </div>
 
-    <% game.players.each do |player| %>
+    <% game.players.order('name ASC').each do |player| %>
       <div class="d-flex flex-column">
         <div class="d-flex flex-row">
           <div class="pl-2 pr-2 flex-grow-1">

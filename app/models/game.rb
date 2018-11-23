@@ -5,9 +5,15 @@ class Game < ApplicationRecord
   has_and_belongs_to_many :players, class_name: 'User', join_table: 'games_players'
 
   scope :paid_players, -> { where(stripe_paid: true) }
+  scope :my_games, ->(user) { players.where.in(user) }
+
 
   LEAGUE = ['MIXED','MENS']
   TEAM = ['Mighty Flux']
+
+  def my_game(user)
+    user.in?(players)
+  end
 
   def player_added?(player_id)
     players.map(&:id).include?(player_id)
@@ -23,7 +29,6 @@ class Game < ApplicationRecord
 
   def outstanding_balance
     cost - (paid_players.count * player_fee)
-    #cost - (player_fee * payments.count)
   end
 
   def paid_players
@@ -31,8 +36,6 @@ class Game < ApplicationRecord
   end
 
   def paid_player?(player_id)
-    #byebug
     paid_players.include?(player_id)
-    #payments.map {|px| px.players.map(&:id)}.flatten.uniq.include?(player_id)
   end
 end

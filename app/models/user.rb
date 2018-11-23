@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
   has_many :payments, as: :payee
 
-  scope :paid_game, ->(game) { payments.where.in(game.payments) }#joins(:payments).where(payments.game_id = game.id AND IN payments }
-
+  scope :paid_game, ->(game) { payments.where.in(game.payments) }
+  
   def self.from_omniauth(auth)
     if where(provider: nil, uid: nil, email: auth.info.email).present?
       # convert guest users into actual users
